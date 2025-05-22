@@ -91,3 +91,23 @@ def test_character_survives_with_heal_during_fight():
     # Il a reçu 5 dégâts (-5) puis +3 soins → hp = 8
     assert c.hp == 8
     assert c.is_dead() is False
+
+def test_character_alternate_attack_and_heal():
+    attacker = Character()
+    defender = Character()
+
+    # Le défenseur est attaqué 3 fois
+    for _ in range(3):
+        attacker.attack(defender)
+
+    # Il se soigne 2 fois
+    for _ in range(2):
+        defender.heal()
+
+    # Encore 2 attaques
+    attacker.attack(defender)
+    attacker.attack(defender)
+
+    # Vérification : hp = 10 - 3 + 2 - 2 = 7
+    assert defender.hp == 7
+    assert defender.is_dead() is False
