@@ -75,3 +75,19 @@ def test_combat_draw():
     fight.run()
 
     assert fight.is_draw() is True
+
+def test_character_survives_with_heal_during_fight():
+    c = Character()
+    attacker = Character()
+
+    # Le personnage subit 5 attaques
+    for _ in range(5):
+        attacker.attack(c)
+
+    # Il se soigne 3 fois
+    for _ in range(3):
+        c.heal()
+
+    # Il a reçu 5 dégâts (-5) puis +3 soins → hp = 8
+    assert c.hp == 8
+    assert c.is_dead() is False
