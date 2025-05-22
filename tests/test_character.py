@@ -6,7 +6,7 @@ from character import Character
 
 def test_character_initial_hp():
     c = Character()
-    assert c.hp == 100
+    assert c.hp == 200
 
 def test_character_death():
     c = Character()
