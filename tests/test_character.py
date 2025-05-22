@@ -51,3 +51,27 @@ def test_character_fight_until_death():
 
     assert defender.hp <= 0
     assert defender.is_dead() is True
+
+def test_combat_draw():
+    a = Character()
+    b = Character()
+    
+    a.hp = 1
+    b.hp = 1
+
+    class MutualCombat:
+        def __init__(self, c1, c2):
+            self.c1 = c1
+            self.c2 = c2
+
+        def run(self):
+            self.c1.attack(self.c2)
+            self.c2.attack(self.c1)
+
+        def is_draw(self):
+            return self.c1.is_dead() and self.c2.is_dead()
+
+    fight = MutualCombat(a, b)
+    fight.run()
+
+    assert fight.is_draw() is True
